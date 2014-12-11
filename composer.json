@@ -1,0 +1,35 @@
+{
+    "name": "twg/omnipay-exact",
+    "type": "library",
+    "description": "E-xact driver for the Omnipay payment processing library",
+    "keywords": [
+        "gateway",
+        "merchant",
+        "omnipay",
+        "exact",
+        "e-xact",
+        "pay",
+        "payment"
+    ],
+    "homepage": "https://github.com/twg/omnipay-exact",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matt MacAulay",
+            "email": "mac@twg.ca"
+        },
+        {
+            "name": "Omnipay Contributors",
+            "homepage": "https://github.com/twg/omnipay-exact/contributors"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Omnipay\\Exact\\" : "src/" }
+    },
+    "require": {
+        "omnipay/common": "~2.0"
+    },
+    "require-dev": {
+        "omnipay/tests": "~2.0"
+    }
+}
