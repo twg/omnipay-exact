@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/twg/omnipay-exact.svg?branch=master)](https://travis-ci.org/twg/omnipay-exact)
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
-processing library for PHP 5.3+. This package implements Paymentech Orbital support for Omnipay.
+processing library for PHP 5.3+. This package implements E-xact support for Omnipay.
 
 ## Installation
 
