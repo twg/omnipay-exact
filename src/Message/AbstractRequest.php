@@ -43,10 +43,10 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             $data,
             array(
               'exceptions' => false,
-              'auth' => [
+              'auth' => array(
                 $this->getUsername(),
                 $this->getPassword()
-              ]
+              )
             )
         )->send();
         return $this->createResponse($httpResponse->json());
