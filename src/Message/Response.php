@@ -20,7 +20,7 @@ class Response extends \Omnipay\Common\Message\AbstractResponse
             return $this->data['error_description'];
         } elseif ($this->data['transaction_error'] != 0) {
             return $this->data['exact_message'];
-        } elseif ($this->data['transaction_approved'] != 1) {
+        } else {
             return $this->data['bank_message'];
         }
     }
@@ -31,7 +31,7 @@ class Response extends \Omnipay\Common\Message\AbstractResponse
             return $this->data['error_number'];
         } elseif ($this->data['transaction_error'] != 0) {
             return $this->data['exact_resp_code'];
-        } elseif ($this->data['transaction_approved'] != 1) {
+        } else {
             return $this->data['bank_resp_code'];
         }
     }
