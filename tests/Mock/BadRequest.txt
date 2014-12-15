@@ -1,0 +1,11 @@
+HTTP/1.1 400 Bad Request
+Cache-Control: no-cache
+Content-Type: application/json; charset=utf-8
+Date: Mon, 15 Dec 2014 16:31:08 GMT
+Location: https://api-demo.e-xact.com/transaction
+Server: Apache
+Status: 400
+Content-Length: 45
+Connection: keep-alive
+
+Bad Request (22) - Invalid Credit Card Number

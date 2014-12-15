@@ -49,7 +49,8 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
               )
             )
         )->send();
-        return $this->createResponse($httpResponse->json());
+
+        return $this->createResponse($httpResponse);
     }
 
     protected function getHeaders()
@@ -65,9 +66,13 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getTestMode() ? $this->testUrl : $this->liveUrl;
     }
 
-    protected function createResponse($data)
+    protected function createResponse($httpResponse)
     {
-        return new Response($this, $data);
+        if ($httpResponse->isError()) {
+            return new ErrorResponse($this, $httpResponse);
+        } else {
+            return new Response($this, $httpResponse->json());
+        }
     }
 
     public function getUsername()

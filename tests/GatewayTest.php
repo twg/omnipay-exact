@@ -38,4 +38,24 @@ class GatewayTest extends GatewayTestCase
         $this->assertSame('000', $response->getCode());
         $this->assertSame('Approved', $response->getMessage());
     }
+
+    public function testBadRequest()
+    {
+        $this->setMockHttpResponse('BadRequest.txt');
+        $request = $this->gateway->purchase(array(
+          'amount' => '10.00',
+          'orderId' => '123',
+          'card'   => 'zzz'
+        ));
+
+        $this->assertInstanceOf('\Omnipay\Exact\Message\PurchaseRequest', $request);
+        $this->assertSame('10.00', $request->getAmount());
+
+        $response = $request->send();
+
+        $this->assertFalse($response->isSuccessful());
+        $this->assertSame(null, $response->getTransactionReference());
+        $this->assertSame(400, $response->getCode());
+        $this->assertSame('Bad Request (22) - Invalid Credit Card Number', $response->getMessage());
+    }
 }
