@@ -68,14 +68,14 @@ class GatewayTest extends GatewayTestCase
         $request = $this->gateway->authorize(array(
             'amount' => '1.00',
             'orderId' => '123',
-            'card' => [
+            'card' => array(
                 'number' => '4111111111111111',
                 'expiryMonth' => '',
                 'expiryYear' => '',
                 'cvv' => '',
                 'firstName' => 'Test',
                 'lastName' => 'User',
-            ]
+            )
         ));
 
         $this->assertInstanceOf('\Omnipay\Exact\Message\PreAuthorizationRequest', $request);
