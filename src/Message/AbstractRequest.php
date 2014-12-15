@@ -20,7 +20,8 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             'transaction_type'  => $this->getTransactionTypeCode(),
             'amount'            => $this->getAmount(),
             'authorization_num' => $this->getAuthorizationNum(),
-            'reference_no'      => $this->getOrderId()
+            'reference_no'      => $this->getOrderId(),
+            'transaction_tag'   => $this->getTransactionTag()
         );
 
         if ($card = $this->getCard()) {
@@ -125,9 +126,25 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('authorizationNum', $value);
     }
 
+    public function getTransactionTag()
+    {
+        return $this->getParameter('transactionTag');
+    }
+
+    public function setTransactionTag($value)
+    {
+        return $this->setParameter('transactionTag', $value);
+    }
+
     protected function calculateVerificationStr1($card)
     {
         $result = '';
         return $result;
+    }
+
+    protected function isTagged()
+    {
+        $transactionTag = $this->getTransactionTag();
+        return isset($transactionTag);
     }
 }

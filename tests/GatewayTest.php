@@ -34,6 +34,7 @@ class GatewayTest extends GatewayTestCase
 
         $this->assertTrue($response->isSuccessful());
         $this->assertSame('ET152556', $response->getTransactionReference());
+        $this->assertSame(982025823, $response->getTransactionTag());
         $this->assertTrue($response->isApproved());
         $this->assertSame('000', $response->getCode());
         $this->assertSame('Approved', $response->getMessage());
@@ -103,6 +104,50 @@ class GatewayTest extends GatewayTestCase
 
         $this->assertTrue($response->isSuccessful());
         $this->assertSame('ET136846', $response->getTransactionReference());
+        $this->assertTrue($response->isApproved());
+        $this->assertSame('000', $response->getCode());
+        $this->assertSame('Approved', $response->getMessage());
+    }
+
+    public function testRefundCardSuccess()
+    {
+        $this->setMockHttpResponse('RefundCardSuccess.txt');
+        $request = $this->gateway->refund(array(
+            'amount'  => '1.00',
+            'orderId' => '123',
+            'card'    => $this->getValidCard()
+        ));
+
+        $this->assertInstanceOf('\Omnipay\Exact\Message\RefundRequest', $request);
+        $this->assertSame('1.00', $request->getAmount());
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame('ET113682', $response->getTransactionReference());
+        $this->assertTrue($response->isApproved());
+        $this->assertSame('000', $response->getCode());
+        $this->assertSame('Approved', $response->getMessage());
+    }
+
+    public function testTaggedRefundSuccess()
+    {
+        $this->setMockHttpResponse('TaggedRefundSuccess.txt');
+        $request = $this->gateway->refund(array(
+            'amount' => '1.00',
+            'orderId' => '123',
+            'authorizationNum' => 'ET158245',
+            'transactionTag' => '982026486'
+        ));
+
+        $this->assertInstanceOf('\Omnipay\Exact\Message\RefundRequest', $request);
+        $this->assertSame('1.00', $request->getAmount());
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame('ET144818', $response->getTransactionReference());
+        $this->assertSame(982026492, $response->getTransactionTag());
         $this->assertTrue($response->isApproved());
         $this->assertSame('000', $response->getCode());
         $this->assertSame('Approved', $response->getMessage());

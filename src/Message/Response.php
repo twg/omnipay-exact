@@ -9,6 +9,11 @@ class Response extends \Omnipay\Common\Message\AbstractResponse
         return $this->data['authorization_num'];
     }
 
+    public function getTransactionTag()
+    {
+        return $this->data['transaction_tag'];
+    }
+
     public function isApproved()
     {
         return $this->data['transaction_approved'] == 1;

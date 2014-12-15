@@ -6,6 +6,10 @@ class RefundRequest extends AbstractRequest
 {
     protected function getTransactionTypeCode()
     {
-        return '04';
+        if ($this->isTagged()) {
+            return '34';
+        } else {
+            return '04';
+        }
     }
 }
