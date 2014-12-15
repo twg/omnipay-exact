@@ -55,6 +55,8 @@ class GatewayTest extends GatewayTestCase
         $response = $request->send();
 
         $this->assertFalse($response->isSuccessful());
+        $this->assertFalse($response->isRedirect());
+        $this->assertFalse($response->isCancelled());
         $this->assertSame(null, $response->getTransactionReference());
         $this->assertSame(400, $response->getCode());
         $this->assertSame('Bad Request (22) - Invalid Credit Card Number', $response->getMessage());
