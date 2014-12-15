@@ -1,0 +1,11 @@
+HTTP/1.1 201 Created
+Cache-Control: no-cache
+Content-Type: application/json; charset=utf-8
+Date: Mon, 15 Dec 2014 19:08:05 GMT
+Location: https://api-demo.e-xact.com/transaction/982026540
+Server: Apache
+Status: 201
+Content-Length: 1836
+Connection: keep-alive
+
+{"logon_message":null,"retrieval_ref_no":"9777683","transaction_type":"32","gateway_id":"ZZ9999-01","track1":null,"tax1_amount":null,"password":null,"bank_message":"Approved","surcharge_amount":null,"merchant_address":"1234 Demo Street","reference_3":null,"ecommerce_flag":0,"track2":null,"merchant_country":"Canada","bank_resp_code_2":null,"merchant_name":"My Company DEMO0999 CAD","error_number":0,"tax2_amount":null,"sequence_no":"003200","pan":null,"cvd_presence_ind":0,"xid":null,"error_description":" ","exact_issname":null,"merchant_city":"Vancouver","language":null,"ctr":"=========== TRANSACTION RECORD ==========\nMy Company DEMO0999\n1234 Demo Street\nVancouver, BC V6B 4X2\nCanada\n\n\nTYPE: Pre-Auth Completion\n\nACCT: Visa  $ 1.00 CAD\n\nCARD NUMBER : ############1111\nDATE/TIME   : 15 Dec 14 14:08:06\nREFERENCE # : 001 003200 M\nAUTHOR. #   : ET153279\nTRANS. REF. : 123\n\n    Approved - Thank You 000\n\n\nPlease retain this copy for your records.\n\nCardholder will pay above amount to card\nissuer pursuant to cardholder agreement.\n=========================================","exact_resp_code":"00","user_name":null,"tax1_number":null,"cc_verification_str1":null,"merchant_postal":"V6B 4X2","cvv2":null,"authorization_num":"ET153279","cavv_algorithm":null,"transaction_approved":1,"cc_number":"############1111","exact_issconf":null,"client_ip":"127.0.0.1","amount":1.0,"exact_message":"Transaction Normal","tax2_number":null,"cavv":null,"transaction_error":0,"cc_expiry":"0915","secure_auth_required":null,"customer_ref":null,"cc_verification_str2":null,"transaction_tag":982026540,"merchant_province":"British Columbia","client_email":null,"zip_code":null,"reference_no":"123","avs":"","merchant_url":null,"cardholder_name":"Test User","secure_auth_result":null,"cavv_response":null,"bank_resp_code":"000"}

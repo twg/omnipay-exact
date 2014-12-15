@@ -109,6 +109,29 @@ class GatewayTest extends GatewayTestCase
         $this->assertSame('Approved', $response->getMessage());
     }
 
+    public function testPreAuthorizationCompletionSuccess()
+    {
+        $this->setMockHttpResponse('TaggedPreAuthorizationCompletionSuccess.txt');
+        $request = $this->gateway->capture(array(
+            'amount' => '1.00',
+            'orderId' => '123',
+            'authorizationNum' => 'ET129831',
+            'transactionTag' => '982026537'
+        ));
+
+        $this->assertInstanceOf('\Omnipay\Exact\Message\PreAuthorizationCompletionRequest', $request);
+        $this->assertSame('1.00', $request->getAmount());
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame('ET153279', $response->getTransactionReference());
+        $this->assertSame(982026540, $response->getTransactionTag());
+        $this->assertTrue($response->isApproved());
+        $this->assertSame('000', $response->getCode());
+        $this->assertSame('Approved', $response->getMessage());
+    }
+
     public function testRefundCardSuccess()
     {
         $this->setMockHttpResponse('RefundCardSuccess.txt');

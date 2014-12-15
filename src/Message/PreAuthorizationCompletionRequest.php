@@ -6,6 +6,6 @@ class PreAuthorizationCompletionRequest extends AbstractRequest
 {
     protected function getTransactionTypeCode()
     {
-        return '02';
+        return '32';
     }
 }
