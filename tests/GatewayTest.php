@@ -175,4 +175,27 @@ class GatewayTest extends GatewayTestCase
         $this->assertSame('000', $response->getCode());
         $this->assertSame('Approved', $response->getMessage());
     }
+
+    public function testTaggedVoidSuccess()
+    {
+        $this->setMockHttpResponse('TaggedVoidSuccess.txt');
+        $request = $this->gateway->void(array(
+            'amount' => '1.00',
+            'orderId' => '123',
+            'authorizationNum' => 'ET121810',
+            'transactionTag' => '982026549'
+        ));
+
+        $this->assertInstanceOf('\Omnipay\Exact\Message\VoidRequest', $request);
+        $this->assertSame('1.00', $request->getAmount());
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame('ET182580', $response->getTransactionReference());
+        $this->assertSame(982026561, $response->getTransactionTag());
+        $this->assertTrue($response->isApproved());
+        $this->assertSame('000', $response->getCode());
+        $this->assertSame('Approved', $response->getMessage());
+    }
 }

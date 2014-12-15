@@ -6,6 +6,6 @@ class VoidRequest extends AbstractRequest
 {
     protected function getTransactionTypeCode()
     {
-        return '13';
+        return '33';
     }
 }
