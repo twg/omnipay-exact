@@ -58,4 +58,53 @@ class GatewayTest extends GatewayTestCase
         $this->assertSame(400, $response->getCode());
         $this->assertSame('Bad Request (22) - Invalid Credit Card Number', $response->getMessage());
     }
+
+    public function testInvalidExpDate()
+    {
+        $this->setMockHttpResponse('InvalidExpDate.txt');
+        $request = $this->gateway->authorize(array(
+            'amount' => '1.00',
+            'orderId' => '123',
+            'card' => [
+                'number' => '4111111111111111',
+                'expiryMonth' => '',
+                'expiryYear' => '',
+                'cvv' => '',
+                'firstName' => 'Test',
+                'lastName' => 'User',
+            ]
+        ));
+
+        $this->assertInstanceOf('\Omnipay\Exact\Message\PreAuthorizationRequest', $request);
+        $this->assertSame('1.00', $request->getAmount());
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame(null, $response->getTransactionReference());
+        $this->assertFalse($response->isApproved());
+        $this->assertSame('205', $response->getCode());
+        $this->assertSame('Invalid Exp. Date', $response->getMessage());
+    }
+
+    public function testPreAuthorizationSuccess()
+    {
+        $this->setMockHttpResponse('PreAuthorizationSuccess.txt');
+        $request = $this->gateway->authorize(array(
+            'amount'  => '1.00',
+            'orderId' => '123',
+            'card'    => $this->getValidCard()
+        ));
+
+        $this->assertInstanceOf('\Omnipay\Exact\Message\PreAuthorizationRequest', $request);
+        $this->assertSame('1.00', $request->getAmount());
+
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame('ET136846', $response->getTransactionReference());
+        $this->assertTrue($response->isApproved());
+        $this->assertSame('000', $response->getCode());
+        $this->assertSame('Approved', $response->getMessage());
+    }
 }
