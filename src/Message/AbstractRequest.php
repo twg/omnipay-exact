@@ -139,6 +139,15 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     protected function calculateVerificationStr1($card)
     {
         $result = '';
+        if ($address1 = $card->getBillingAddress1()) {
+            $result .= $address1;
+        }
+        if ($address2 = $card->getBillingAddress2()) {
+            $result .= $address2;
+        }
+        if ($postCode = $card->getBillingPostcode()) {
+            $result .= '|' . $postCode;
+        }
         return $result;
     }
 
